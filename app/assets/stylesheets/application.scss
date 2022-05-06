@@ -124,3 +124,14 @@ form.button_to {
 input[name="commit"] {
   margin-top: 1em;
 }
+
+.navbar-nav {
+  align-items: center;
+  span {
+    color: rgba(255, 255, 255, 0.55);
+  }
+}
+
+.nav-item.last {
+  margin-left: 0.5em;
+}
