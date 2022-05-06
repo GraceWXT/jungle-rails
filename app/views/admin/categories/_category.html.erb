@@ -1,0 +1,16 @@
+<tr>
+  <td>
+    <%= category.name %>
+  </td>
+  <td>
+    <% category.products.each { |product| %>
+    <li><%= product.name %></li>
+    <% } %>
+  </td>
+   <!-- <td>
+    <%= category.created_at %>
+  </td> -->
+    <!-- <td>
+    <%= category.updated_at %>
+  </td>  -->
+</tr>
