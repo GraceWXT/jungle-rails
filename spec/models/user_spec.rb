@@ -1,8 +1,8 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe User, type: :model do
 
-  describe 'Validations' do
+  describe "Validations" do
 
     it "creates a user with first and last name, unique email, password and matching password confirmation" do
       @user = User.create(first_name: "Test", last_name: "User", email: "a@a.com",
@@ -64,4 +64,23 @@ RSpec.describe User, type: :model do
     end
 
   end
+
+  describe ".authenticate_with_credentials" do
+    it "should allow login with correct credentials" do
+      @user = User.create(first_name: "Test", last_name: "User", email: "a@a.com",
+        password: "test", password_confirmation: "test")
+      @candidate = User.authenticate_with_credentials("a@a.com", "test")
+
+      expect(@candidate).to eq(@user)
+    end
+
+    it "should not allow login with correct credentials" do
+      @user = User.create(first_name: "Test", last_name: "User", email: "a@a.com",
+        password: "test", password_confirmation: "test")
+      @candidate = User.authenticate_with_credentials("a@a.com", "testi")
+
+      expect(@candidate).to eq(nil)
+    end
+  end
+
 end
