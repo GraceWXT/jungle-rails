@@ -11,7 +11,7 @@ class User < ApplicationRecord
   validates :password, length: { minimum: 3 }
 
   def self.authenticate_with_credentials(email, password)
-    user = User.where("email = ?", email).first
+    user = User.where("LOWER(email) = LOWER(?)", email.strip).first
 
     if user && user.authenticate(password)
       user
