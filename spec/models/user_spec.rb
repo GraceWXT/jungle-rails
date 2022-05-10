@@ -13,7 +13,7 @@ RSpec.describe User, type: :model do
 
     it "throws an error when the password and password confirmation do not match" do
       @user = User.create(first_name: "Test", last_name: "User", email: "a@a.com",
-        password: "test", password_confirmation: "test")
+        password: "test", password_confirmation: "testi")
 
       expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
     end
@@ -42,7 +42,7 @@ RSpec.describe User, type: :model do
       @user = User.create(first_name: "Test", last_name: "User",
         password: "test", password_confirmation: "test")
 
-      expect(@user.errors.full_messages).to include("Last name can't be blank")
+      expect(@user.errors.full_messages).to include("Email can't be blank")
     end
 
     it "throws an error when the email is not unique" do
