@@ -74,12 +74,28 @@ RSpec.describe User, type: :model do
       expect(@candidate).to eq(@user)
     end
 
-    it "should not allow login with correct credentials" do
+    it "should not allow login with wrong credentials" do
       @user = User.create(first_name: "Test", last_name: "User", email: "a@a.com",
         password: "test", password_confirmation: "test")
       @candidate = User.authenticate_with_credentials("a@a.com", "testi")
 
       expect(@candidate).to eq(nil)
+    end
+
+    it "should allow login if email has leading or trailing whitespace" do
+      @user = User.create(first_name: "Test", last_name: "User", email: "a@a.com",
+        password: "test", password_confirmation: "test")
+      @candidate = User.authenticate_with_credentials(" a@a.com ", "test")
+
+      expect(@candidate).to eq(@user)
+    end
+
+    it "should be case insensitive with email input" do
+      @user = User.create(first_name: "Test", last_name: "User", email: "a@a.com",
+        password: "test", password_confirmation: "test")
+      @candidate = User.authenticate_with_credentials("a@A.cOm", "test")
+
+      expect(@candidate).to eq(@user)
     end
   end
 
